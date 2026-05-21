@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dashboard_page.dart';
 import 'transactions_page.dart';
-import 'analytics_page.dart';
+import 'advanced_analytics_page.dart';
+import 'budget_management_page.dart';
 import 'settings_page.dart';
 import '../widgets/navigation/bottom_navbar.dart';
 
@@ -18,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const DashboardPage(),
     const TransactionsPage(),
-    const AnalyticsPage(),
+    const AdvancedAnalyticsPage(),
+    const BudgetManagementPage(),
     const SettingsPage(),
   ];
 
@@ -26,13 +28,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavBar(
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onItemSelected: (index) {
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
+        type: BottomNavigationBarType.fixed,
+        elevation: 8,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.credit_card),
+            label: 'Transactions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.analytics),
+            label: 'Analytics',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.trending_down),
+            label: 'Budget',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
